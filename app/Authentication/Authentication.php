@@ -48,17 +48,8 @@ class Authentication extends Session {
 
 								
 							} else {
-
-                                $Brute = $this->db->prepare('SELECT COUNT(*) AS nb FROM logs_logins WHERE email = ? ORDER BY date DESC');
-                                $Brute->execute(array($this->email));
-                                $BruteFetch = $Brute->fetch();
-
-                                if($BruteFetch['nb'] >= 5 && $BruteFetch['date']) {
-                                    
-                                }
-
-								$response = 'Votre mot de passe est incorrect';
-								$status = 'error';
+                                $response = 'Votre mot de passe est incorrect';
+                                $status = 'error';
 							}
 							
 						} else {

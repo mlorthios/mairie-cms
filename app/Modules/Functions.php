@@ -73,7 +73,7 @@ class Functions {
 					$temps_type.= "s";
 				}
 
-				return 'Il y a ' . $temps_conv . ' ' . $temps_type;
+				return '' . $temps_conv . ' ' . $temps_type;
 			}
 		}
 	}

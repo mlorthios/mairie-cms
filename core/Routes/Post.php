@@ -32,6 +32,7 @@ use App\Pages\admin\Settings\Settings;
 // Login
 
 $router->post('/api/admin/login', function() {
+
     if(!Session::Logging()) {
         new Authentication;
     } else {
