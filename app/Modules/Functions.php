@@ -248,7 +248,7 @@ class Functions {
             $month = date("n", strtotime($f['date_event']));
             $day = date("N", strtotime($f['date_event']));
 	        echo '<div class="events_list">
-                        <div class="date">'.$day_letter[$day-1].' '.date("j", strtotime($f['date_event'])).' '.mb_strtolower($month_letter[$month-1]).' 2019</div>
+                        <div class="date">'.$day_letter[$day-1].' '.date("j", strtotime($f['date_event'])).' '.mb_strtolower($month_letter[$month-1]).' '.date("Y", strtotime($f['date_event'])).'</div>
                         <div class="body">';
 
 	            $List = Database::PDO()->prepare('SELECT * FROM events WHERE date_event = ?');

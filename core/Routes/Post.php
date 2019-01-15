@@ -28,6 +28,7 @@ use App\Pages\admin\Newsletter\Newsletter;
 use App\Pages\admin\Users\Users;
 use App\Pages\admin\Permissions\Permissions;
 use App\Pages\admin\Settings\Settings;
+use App\Pages\web\News\AddComment;
 
 // Login
 
@@ -565,4 +566,10 @@ $router->post('/api/admin/pages/summernote/add/img', function() {
             return false;
         }
     }
+});
+
+// Add Comment
+
+$router->post('/api/web/news/add/comment', function() {
+    new AddComment;
 });

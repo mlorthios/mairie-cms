@@ -604,3 +604,22 @@ margin-bottom:.75rem}
         width: auto;
     }
 }
+
+hr {
+    margin-top: 13px;
+    margin-bottom: 13px;
+}
+
+.comment_post>.name {
+    color: #8e8e8e;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.comment_post>.content {
+    font-size: 14px;
+}
+
+.grecaptcha-badge {
+    display: none;
+}
