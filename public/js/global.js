@@ -69,12 +69,59 @@ for(var i = 0; i < links.length; i++) {
 Barba.Pjax.start();
 
 $(document).ready(function() {
+    $('body').on('submit', '#__comment_event', function (e) {
+        e.preventDefault();
+
+        var $this = $(this);
+        var csrf = $('meta[name="csrf-token"]').attr('content');
+        grecaptcha.ready(function() {
+            $('#addcome').html('Vérification reCaptcha...');
+            $('#addcome').attr("disabled", "disabled");
+            grecaptcha.execute('6Le46YkUAAAAAOr5n00D7yCdtbQjFHpQBZ1DSZKD', {action: 'action_name'})
+                .then(function(token) {
+                    var data = $this.serializeArray();
+                    data.push({'name': 'token', 'value': token});
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': csrf
+                        },
+                        url: '/api/web/event/add/comment',
+                        type: 'POST',
+                        data: data,
+                        dataType: 'json',
+                        success: function(json) {
+                            if(json.status == 'success') {
+                                console.log('success');
+
+                                var data = new Array(json.response);
+
+                                $('#add_c_event').prepend('<div class="comment_post">\n' +
+                                    '                                      <div class="name">'+data[0][0]+' • '+data[0][2]+'</div>\n' +
+                                    '                                      <div class="content">'+data[0][1]+'</div>\n' +
+                                    '                                      </div><hr>');
+                                $('#addcome').html('Commentaire ajouté')
+                            } else {
+                                console.log(json.response);
+                                $('#addcome').html('Envoyer')
+                                $('#addcome').removeAttr("disabled");
+                            }
+                        },
+                        error: function(a, b) {
+                            $('#addcome').html('Envoyer')
+                            $('#addcome').removeAttr("disabled");
+                        }
+                    });
+                });
+        });
+    });
+});
+
+$(document).ready(function() {
     $('body').on('submit', '#__comment', function (e) {
         e.preventDefault();
 
         var $this = $(this);
         var csrf = $('meta[name="csrf-token"]').attr('content');
-        var url = $('meta[name="news-url"]').attr('content');
         grecaptcha.ready(function() {
             $('#addcom').html('Vérification reCaptcha...');
             $('#addcom').attr("disabled", "disabled");
@@ -82,7 +129,6 @@ $(document).ready(function() {
                 .then(function(token) {
                     var data = $this.serializeArray();
                     data.push({'name': 'token', 'value': token});
-                    data.push({'name': 'url', 'value': url});
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': csrf

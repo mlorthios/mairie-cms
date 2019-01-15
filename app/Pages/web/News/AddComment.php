@@ -46,8 +46,8 @@ class AddComment {
             $responseData->success = true;
 
             if($responseData->success) {
-               $r = Database::PDO()->prepare('SELECT * FROM news_comments WHERE ip = ?');
-               $r->execute(array(Functions::AddressIP()));
+               $r = Database::PDO()->prepare('SELECT * FROM news_comments WHERE ip = ? AND news_url = ?');
+               $r->execute(array(Functions::AddressIP(), $this->url));
 
                $row = $r->rowCount();
 

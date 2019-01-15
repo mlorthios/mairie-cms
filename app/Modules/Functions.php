@@ -223,7 +223,7 @@ class Functions {
                         <i class="far fa-envelope"></i> Newsletter
                     </div>
                     <div class="panel-body">
-                        <p style="text-align: center; font-size: 13px">Recevez l\'actualités de la ville d\'Audruicq par e-mail !</p>
+                        <p style="text-align: center; font-size: 13px">Recevez l\'actualité de la ville d\'Audruicq par e-mail !</p>
                         <div id="__message-alert"></div>
                         <div class="form-group">
                             <input class="form-control" name="newsletter_email" placeholder="Adresse e-mail">

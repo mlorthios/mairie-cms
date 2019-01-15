@@ -10,7 +10,6 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="initial-scale=1.0">
         <meta name="csrf-token" content="<?= $csrf_token ?>">
-        <meta name="news-url" content="<?= $id ?>">
         <link rel="stylesheet" href="/public/css/bootstrap.min.css">
         <link rel="stylesheet" href="/public/css/all.min.css">
         <link rel="stylesheet" href="/public/plugins/lightbox/dist/jquery.fancybox.min.css">
@@ -46,6 +45,7 @@
                     <div class="panel-body">
                         <form id="__comment">
                             <div class="row">
+                                <input name="url" value="<?= $id; ?>" style="display: none">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <textarea class="form-control" name="message" rows="3" placeholder="Exprimez-vous..."></textarea>
