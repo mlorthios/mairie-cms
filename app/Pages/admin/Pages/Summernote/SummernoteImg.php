@@ -59,9 +59,11 @@ class SummernoteImg {
 
                             $image = new \Imagick($_FILES['file']['tmp_name']);
 
-                            $image->setImageFormat("jpg");
 
-                            $result = $image->writeImage('public/img/uploads/'.$namee.'.jpg');
+                            $image->setImageFormat("jpg");
+                            $ima = $image->appendImages(true);
+
+                            $result = $ima->writeImage('public/img/uploads/'.$namee.'.jpg');
 
                             if($result) {
                                 $status = 'success';
