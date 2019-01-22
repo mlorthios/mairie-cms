@@ -61,7 +61,7 @@ class SummernoteImg {
 
                             $image->setImageFormat("jpg");
 
-                            $result = $image->writeImage('public/img/uploads/'.$namee.'.jpg', true);
+                            $result = $image->writeImage('public/img/uploads/'.$namee.'.jpg');
 
                             if($result) {
                                 $status = 'success';
