@@ -61,17 +61,21 @@ class SummernoteImg {
 
 
                             $image->setImageFormat("jpg");
-                            $ima = $image->appendImages(true);
+                            $pages = $image->getNumberImages();
 
-                            $result = $ima->writeImage('public/img/uploads/'.$namee.'.jpg');
+                            if ($pages) {
+                                foreach($image as $index => $pdf_image) {
+                                    $image->writeImage('public/img/uploads/'.$namee.'.jpg');
+                                }
 
-                            if($result) {
                                 $status = 'success';
                                 $response = '/public/img/uploads/'.$namee.'.jpg';
+
                             } else {
                                 $status = 'error';
-                                $response = 'Erreur durant l\'importation de votre PDF';
+                                $response = 'PDF doesn\'t have any pages';
                             }
+
                             
                         } else {
                             $status = 'error';
