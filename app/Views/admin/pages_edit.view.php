@@ -53,10 +53,10 @@
 				<div class="row">
                     <div class="col-md-10" style="margin-bottom: 15px">
                         <div class="form-group">
-                            <input name="title" class="form-control form-control-lg" type="text" value="<?= $fpage->Data($id, 'name') ?>">
+                            <input name="title" class="form-control form-control-lg" placeholder="Nom de page" type="text" value="<?= $fpage->Data($id, 'name') ?>">
                         </div>
                         <div class="form-group">
-                            <input name="description" class="form-control form-control-lg" type="text" value="<?= $fpage->Data($id, 'description') ?>">
+                            <input name="description" class="form-control form-control-lg" placeholder="Description" type="text" value="<?= $fpage->Data($id, 'description') ?>">
                         </div>
                         <textarea id="summernote" name="content"><?= $fpage->Data($id, 'content') ?></textarea>
                     </div>

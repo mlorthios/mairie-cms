@@ -82,7 +82,7 @@
 
                                     $month = date("n", strtotime($t['date']));
                                     echo '<div class="comment_post">
-                                      <div class="name">'.$t['first_name'].' • '.date("j", strtotime($t['date'])).' '.mb_strtolower($months[$month-1]).' '.date("Y", strtotime($t['date'])).' à '.date("H:i", strtotime($t['date'])).'</div>
+                                      <div class="name">'.$t['first_name'].' • '.date("j", strtotime($t['date'])).' '.strtolower($months[$month-1]).' '.date("Y", strtotime($t['date'])).' à '.date("H:i", strtotime($t['date'])).'</div>
                                       <div class="content">'.$t['content'].'</div>
                                       </div><hr>';
                                 }
