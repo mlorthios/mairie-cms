@@ -58,24 +58,19 @@ class SummernoteImg {
                             $chemin = "public/img/uploads/".$namee.".".$extensionUpload;
 
                             $image = new \Imagick($_FILES['file']['tmp_name']);
+                            $image->resetIterator();
+                            $ima = $image->appendImages(true);
+                            $ima->setImageFormat('jpg');
 
+                            $result = $ima->writeImage('public/img/uploads/'.$namee.'.jpg');
 
-                            $image->setImageFormat("jpg");
-                            $pages = $image->getNumberImages();
-
-                            if ($pages) {
-                                foreach($image as $index => $pdf_image) {
-                                    $image->writeImage('public/img/uploads/'.$namee.'.jpg');
-                                }
-
+                            if($result) {
                                 $status = 'success';
                                 $response = '/public/img/uploads/'.$namee.'.jpg';
-
                             } else {
                                 $status = 'error';
-                                $response = 'PDF doesn\'t have any pages';
+                                $response = 'Erreur durant l\'importation de votre PDF';
                             }
-
                             
                         } else {
                             $status = 'error';
