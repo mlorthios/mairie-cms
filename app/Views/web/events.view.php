@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <div class="legacy" style="margin-bottom: 20px; color: #000; text-align: center;">
-                    <small>Ce site est protégé par reCAPTCHA et les <a style="color: #757575" href="https://policies.google.com/privacy">règles de confidentialité</a> et les <a style="color: #757575" href="https://policies.google.com/terms">conditions d'utilisation de Google</a> s'appliquent.</small>
+                    <small>Ce site est protégé par reCAPTCHA et les <a style="color: #757575" href="https://policies.google.com/privacy" target="_blank">règles de confidentialité</a> et les <a style="color: #757575" href="https://policies.google.com/terms" target="_blank">conditions d'utilisation de Google</a> s'appliquent.</small>
                 </div>
             </div>
             <div class="col-md-4">
@@ -115,8 +115,10 @@
                     </div>
                     <div class="panel-body">
                         <?= $function->ListEvents(); ?>
-                        <hr>
-                        <a style="color: #444040" href="/events"><i class="fa fa-angle-double-right"></i> Voir tous les événements</a>
+                        <?php if($function->ListEvents('nonull') > 0) { ?>
+                            <hr>
+                            <a style="color: #444040" href="/events"><i class="fa fa-angle-double-right"></i> Voir tous les événements</a>
+                        <?php } ?>
                     </div>
                 </div>
                 <?= $function->RightMenu(); ?>

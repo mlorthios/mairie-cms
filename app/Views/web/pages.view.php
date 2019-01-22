@@ -55,8 +55,10 @@
                     </div>
                     <div class="panel-body">
                         <?= $function->ListEvents(); ?>
-                        <hr>
-                        <a style="color: #444040" href="/events"><i class="fa fa-angle-double-right"></i> Voir tous les événements</a>
+                        <?php if($function->ListEvents('nonull') > 0) { ?>
+                            <hr>
+                            <a style="color: #444040" href="/events"><i class="fa fa-angle-double-right"></i> Voir tous les événements</a>
+                        <?php } ?>
                     </div>
                 </div>
                 <?= $function->RightMenu(); ?>

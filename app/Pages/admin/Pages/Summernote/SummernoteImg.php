@@ -37,7 +37,7 @@ class SummernoteImg {
                 if(isset($_FILES['file']) AND !empty($_FILES['file']['name'])) {
                     
                     $tailleMax = 20971520000;
-                    $extensionsValides = array('jpg', 'jpeg', 'gif', 'png', 'JPG', 'JGEP', 'PNG', 'GIF');
+                    $extensionsValides = array('jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'PNG', 'GIF');
                     $pdf = array('pdf', 'PDF');
                     if($_FILES['file']['size'] <= $tailleMax) {
                         $extensionUpload = strtolower(substr(strrchr($_FILES['file']['name'], '.'), 1));
@@ -56,22 +56,19 @@ class SummernoteImg {
                             
                             $namee = md5(date('Y-m-d H:i:s') . $_FILES['file']['name']);
                             $chemin = "public/img/uploads/".$namee.".".$extensionUpload;
-                            $resultat = move_uploaded_file($_FILES['file']['tmp_name'], $chemin);
-                            if($resultat) {
-                                
-                                $image = new Imagick();
-                                
-                                $image->readImage($chemin);
-                            
-                                $image->setImageFormat("jpg"); 
 
-                                $image->writeImage('public/img/uploads/'.$name.'.jpg');
-                                
+                            $image = new \Imagick($_FILES['file']['tmp_name']);
+
+                            $image->setImageFormat("jpg");
+
+                            $result = $image->writeImage('public/img/uploads/'.$namee.'.jpg', true);
+
+                            if($result) {
                                 $status = 'success';
                                 $response = '/public/img/uploads/'.$namee.'.jpg';
                             } else {
                                 $status = 'error';
-                                $response = "Erreur durant l'importation de votre image";
+                                $response = 'Erreur durant l\'importation de votre PDF';
                             }
                             
                         } else {

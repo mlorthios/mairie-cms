@@ -133,12 +133,15 @@ class Functions {
         }
     }
     
-    public function ListEvents() {
-        $Events = Database::PDO()->prepare('SELECT * FROM events WHERE date_event > ? ORDER BY date_event DESC LIMIT 3');
-        $Events->execute(array(date('Y-m-d')));
-        
-        while($e = $Events->fetch()) {
-            echo '<div class="media">
+    public function ListEvents($type = null) {
+        if($type == null) {
+            $Events = Database::PDO()->prepare('SELECT * FROM events WHERE date_event > ? ORDER BY date_event DESC LIMIT 3');
+            $Events->execute(array(date('Y-m-d')));
+
+            $e = $Events->rowCount();
+            if($e > 0) {
+                while($e = $Events->fetch()) {
+                    echo '<div class="media">
                     <div class="media-left">
                         <a href="/events/'.$e['url'].'">
                             <img style="height: 60px; width: 60px" class="media-object" src="'.$e['image'].'">
@@ -150,6 +153,17 @@ class Functions {
                         <span>'.$e['description'].'</span>
                     </div>
                 </div>';
+                }
+            } else {
+                echo 'Aucun événement n\'a été publié';
+            }
+        } else {
+            $Events = Database::PDO()->prepare('SELECT * FROM events WHERE date_event > ? ORDER BY date_event DESC LIMIT 3');
+            $Events->execute(array(date('Y-m-d')));
+
+            $e = $Events->rowCount();
+
+            return $e;
         }
     }
     
