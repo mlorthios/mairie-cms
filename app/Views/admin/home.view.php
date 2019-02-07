@@ -71,7 +71,7 @@
 							<div class="stats-info">
 								<h4>TOTAL DE COMMENTAIRES</h4>
 								<p>
-									0
+									<?= $fpage->TotalComments(); ?>
 								</p>
 							</div>
 						</div>

@@ -46,9 +46,9 @@ body {
 }
 
 .header>.img {
-    background: url(/public/img/banner.png) no-repeat;
-    background-size: cover;
-    height: 160px;
+    background: url(/public/img/header/banner.png) no-repeat;
+    background-size: 100%;
+    height: 115px;
     width: 100%;
     border-radius: 6px;
 }
@@ -622,4 +622,14 @@ hr {
 
 .grecaptcha-badge {
     display: none;
+}
+
+@media (max-width: 767px) {
+    .header {
+        display: none;
+    }
+
+    .navbar-inverse {
+        border-radius: 0 0 6px 6px;
+    }
 }

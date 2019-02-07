@@ -4,8 +4,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div style="margin-bottom: 5px"><i>Nous contacter</i></div>
-                    <span>Tél: 06 00 00 00 00</span><br>
-                    <span>Fax: 06 00 00 00 00</span><br>
+                    <span style="color: #717171; -webkit-text-fill-color: #717171;">Tél: <span style="text-decoration: underline">03 21 46 06 60</span></span><br>
                     <a style="color: #2a93c7" href="mailto:contact@ville-audruicq.fr">contact@ville-audruicq.fr</a>
                 </div>
                 <div class="col-md-6">

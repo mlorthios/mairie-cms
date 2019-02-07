@@ -24,6 +24,7 @@ use App\Pages\admin\Messages\MessageEdit;
 use App\Pages\admin\Messages\MessageDelete;
 use App\Pages\admin\Banners\BannersEdit;
 use App\Pages\admin\Banners\BannersCheck;
+use App\Pages\admin\Banners\BannersTop;
 use App\Pages\admin\Newsletter\Newsletter;
 use App\Pages\admin\Users\Users;
 use App\Pages\admin\Permissions\Permissions;
@@ -376,6 +377,22 @@ $router->post('/api/admin/banner/disabled', function() {
             $t = new BannersCheck();
             
             $t->Disabled();
+        } else {
+            header('Location: /');
+            return false;
+        }
+    }
+});
+
+// Edit Banner Top
+
+$router->post('/api/admin/banner/top', function() {
+    if(!Session::Logging()) {
+        header('Location: /admin/login');
+        return false;
+    } else {
+        if(Protections::Permission('permission_admin_access') == 'access' AND Protections::Permission('permission_admin_banners') == 'access') {
+            new BannersTop;
         } else {
             header('Location: /');
             return false;

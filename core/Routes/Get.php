@@ -12,7 +12,6 @@ use App\Pages\admin\Banners\BannersCheck;
 use App\Pages\admin\Newsletter\Newsletter;
 
 // Home
-
 $router->get('/', function () {
 	
 	$db = Database::PDO();
@@ -30,6 +29,27 @@ $router->get('/', function () {
 	require 'app/Views/web/home.view.php';
 	
 });
+
+$contact = Database::PDO()->query('SELECT * FROM contact');
+$fcontact = $contact->fetch();
+
+if($fcontact['active'] == '1') {
+    $router->get('/contact', function() {
+        $db = Database::PDO();
+
+        $function = new Functions();
+
+        $newsletter = new Newsletter();
+
+        $csrf_token = Session::Get('csrf_token');
+
+        $page = 'home';
+
+        $pageid = '-7';
+
+        require 'app/Views/web/contact.view.php';
+    });
+}
 
 // Pages
 
@@ -317,6 +337,26 @@ $router->get('/admin/events/edit/(\d+)', function($id) {
                 return false;
             }
             
+        } else {
+            header('Location: /admin/');
+            return false;
+        }
+    }
+});
+
+$router->get('/admin/events/comments/(\d+)', function($id) {
+    if(!Session::Logging()) {
+        header('Location: /admin/login');
+        return false;
+    } else {
+        if(Protections::Permission('permission_admin_access') == 'access' AND Protections::Permission('permission_admin_events') == 'access') {
+            $user = new Users;
+            $page = 'events';
+            $db = Database::PDO();
+            $csrf_token = Session::Get('csrf_token');
+            $function = new Functions();
+            require 'app/Views/admin/events_comments.view.php';
+
         } else {
             header('Location: /admin/');
             return false;

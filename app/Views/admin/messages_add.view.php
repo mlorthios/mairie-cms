@@ -155,6 +155,7 @@
                             title: "Notification",
                             text: "Une erreur est survenue : " + request.responseText
                         });
+                        console.log(request)
                     }
                 });
                 

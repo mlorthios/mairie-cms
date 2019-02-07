@@ -67,5 +67,23 @@ class AdminHome {
             }
         }
     }
+
+    public function TotalComments() {
+        if(!Session::Logging()) {
+            return false;
+        } else {
+            if(Protections::Permission('permission_admin_access') == 'access') {
+                $comments_event = Database::PDO()->query('SELECT COUNT(id) AS nb FROM events_comments');
+                $fetch = $comments_event->fetch();
+
+                $comments_news = Database::PDO()->query('SELECT COUNT(id) AS nb FROM news_comments');
+                $fetch2 = $comments_news->fetch();
+
+                return $fetch['nb'] + $fetch2['nb'];
+            } else {
+                return false;
+            }
+        }
+    }
     
 }

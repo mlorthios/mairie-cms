@@ -75,6 +75,7 @@
                                                 <td>'.$e['title'].'</td>
                                                 <td>'.$function->ConvertTime($e['date']).'</td>
                                                 <td class="with-btn" nowrap="">
+                                                    <a href="/admin/events/comments/'.$e['id'].'" class="btn btn-sm btn-success m-r-2">Commentaires</a>
                                                     <a href="/admin/events/edit/'.$e['id'].'" class="btn btn-sm btn-primary m-r-2">Éditer</a>
                                                     <a href="javascript:;" onclick="Delete('.$e['id'].')" class="btn btn-sm btn-white">Supprimer</a>
                                                 </td>

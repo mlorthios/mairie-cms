@@ -98,8 +98,11 @@ class Functions {
     }
     
     public function MessagesAlert($pageid) {
+	    $page = Database::PDO()->prepare('SELECT * FROM pages WHERE url = ?');
+	    $page->execute(array($pageid));
+	    $fd = $page->fetch();
         $Message = Database::PDO()->prepare('SELECT * FROM messages WHERE page_id = ?');
-        $Message->execute(array($pageid));
+        $Message->execute(array($fd['id']));
         $b = $Message->rowCount();
             
         if($b > 0) {
@@ -210,10 +213,15 @@ class Functions {
     }
     
     public function SousMenu() {
-        
+
+	    $contact = Database::PDO()->query('SELECT * FROM contact');
+	    $fcontact = $contact->fetch();
+
+	    if($fcontact['active'] == '1') {
+            echo '<a href="/contact"><li><i class="fa fa-envelope"></i> Nous contacter</li></a>';
+        }
         
         $Navigator = Database::PDO()->query('SELECT * FROM navigator ORDER BY number');
-                        
         while($a = $Navigator->fetch()) {
             $Pages = Database::PDO()->prepare('SELECT *, COUNT(*) AS nb FROM pages WHERE navigator_id = ?');
             $Pages->execute(array($a['id']));

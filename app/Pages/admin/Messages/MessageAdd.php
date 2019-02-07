@@ -43,8 +43,8 @@ class MessageAdd {
                if(!empty($this->message) && !empty($this->type) && !empty($this->page) OR $this->page == 0) {
                    
                    if($this->page == 'fullpage') {
-                       $Add = $this->db->prepare('INSERT INTO messages(message, type, page_id, date, fullpage) VALUES(?, ?, ?, ?, ?)');
-                       $Add->execute(array($this->message, $this->type, $this->page, date('Y-m-d H:i:s'), '1'));
+                       $Add = $this->db->prepare('INSERT INTO messages(message, type, date, fullpage) VALUES(?, ?, ?, ?)');
+                       $Add->execute(array($this->message, $this->type, date('Y-m-d H:i:s'), '1'));
                        
                        $response = 'Votre message a bien été publié';
                        $status = 'success';

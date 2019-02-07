@@ -50,7 +50,8 @@
 			<?php include 'partials/nav.partial.php'; ?>
 			<div class="sidebar-bg"></div>
 			<div id="content" class="content">
-                <form id="posting" enctype="multipart/form-data"><div class="row">
+                <form id="posting" enctype="multipart/form-data">
+                    <div class="row">
                     <div class="col-md-10">
                         <div class="form-group">
                             <label>Titre de l'événement</label>

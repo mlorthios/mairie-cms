@@ -6,6 +6,7 @@ const Marquee = Barba.BaseView.extend({
     namespace: 'marquee', 
     onEnterCompleted: () => {
         $.getScript( "/public/plugins/marquee/jquery.marquee.min.js");
+
         $('#load_fancy img').each(function(){
                 var src = $(this).attr('src');
                 $(this).wrap('<a class="no-barba" data-fancybox="gallery" href="'+src+'"></a>');

@@ -41,7 +41,6 @@ class MessageEdit {
             if(Protections::Permission('permission_admin_access') == 'access' AND Protections::Permission('permission_admin_messages') == 'access') {
                 
                if(!empty($this->id) && !empty($this->message) && !empty($this->type) && !empty($this->page)) {
-                   
                    $IdCheck = $this->db->prepare('SELECT * FROM messages WHERE id = ?');
                    $IdCheck->execute(array($this->id));
                    
@@ -50,8 +49,8 @@ class MessageEdit {
                    if($rowId > 0) {
                        
                        if($this->page == 'fullpage') {
-                           $Update = $this->db->prepare('UPDATE messages SET message = ?, type = ?, page_id = ?, fullpage = ? WHERE id = ?');
-                           $Update->execute(array($this->message, $this->type, $this->page, '1', $this->id));
+                           $Update = $this->db->prepare('UPDATE messages SET message = ?, type = ?, fullpage = ? WHERE id = ?');
+                           $Update->execute(array($this->message, $this->type, '1', $this->id));
                        
                            $response = 'Votre message a bien été modifié';
                            $status = 'success';

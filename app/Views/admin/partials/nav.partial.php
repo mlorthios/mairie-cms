@@ -70,6 +70,12 @@
                     <span>Newsletter</span>
                 </a>
             </li>
+            <li class="<?php if($page == 'contact') { echo 'active'; } ?> has-sub">
+                <a href="/admin/contact">
+                    <i class="fa fa-paper-plane"></i>
+                    <span>Formulaire de contact</span>
+                </a>
+            </li>
             <li class="nav-header">Paramètres</li>
             <li class="<?php if($page == 'users') { echo 'active'; } ?> has-sub">
                 <a href="/admin/users">

@@ -51,7 +51,7 @@
 			<div id="content" class="content">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="alert alert-primary">Pour éviter tout problème d'affichage, vous devez utiliser une largeur de 200px. Une bannière de 200x800 au préalable.</div>
+                        <div class="alert alert-primary">Pour éviter tout problème d'affichage, vous devez utiliser une largeur de 200px. Une bannière de 200x800 au préalable. Uniquement pour les bannières gauche et droite</div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
@@ -87,6 +87,19 @@
                         </div>
                         <div style="margin-top: 10px; text-align: center">
                             <img id="ban_right" src="<?= $b->Banner('left'); ?>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Bannière haut (Hauteur de 115 pixels)</label>
+                            <input name="file_top" type="file" class="btn btn-primary btn-block">
+                        </div>
+                        <button class="btn btn-info btn-block" type="submit" name="top">Modifier</button>
+                        <div style="display: none; margin-top: 10px" id="progresstop" class="progress rounded-corner">
+                            <div class="progress-bar" style="width: 0%;">Chargement</div>
+                        </div>
+                        <div style="margin-top: 10px; text-align: center">
+                            <img style="width: 100%; height: auto" id="ban_top" src="/public/img/header/banner.png">
                         </div>
                     </div>
                 </div>
@@ -406,6 +419,96 @@
                 $('#ban_left').show();
                 readURLLeft(this);
             });
+
+            $('[name="top"]').click(function() {
+                $('[name="top"]').prop('disabled', true);
+                $('[name="top"]').html('Modification en cours');
+
+                var csrf = $('meta[name="csrf-token"]').attr('content'),
+                    image = $('[name="file_top"]').prop("files")[0];
+
+                data = new FormData();
+                data.append("file_top", image);
+                data.append("placement", "right");
+
+                if(image) {
+                    $('#progresstop').show();
+                }
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': csrf
+                    },
+                    url: '/api/admin/banner/top',
+                    type: 'POST',
+                    data: data,
+                    xhr: function() {
+                        var myXhr = $.ajaxSettings.xhr();
+                        if (myXhr.upload) myXhr.upload.addEventListener('progress',progressHandlingFunctionTop, false);
+                        return myXhr;
+                    },
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+                    success: function(json) {
+                        if(json.status == 'success') {
+                            $.gritter.add({
+                                title: "Notification",
+                                text: json.response
+                            });
+                            $("[name='top']").prop('disabled', false);
+                            $("[name='top']").html('Modifier');
+                        } else {
+                            $.gritter.add({
+                                title: "Notification",
+                                text: json.response,
+                            });
+                            $("[name='top']").prop('disabled', false);
+                            $("[name='top']").html('Modifier');
+                        }
+                    },
+                    error: function (request, status, error) {
+                        $("[name='top']").prop('disabled', false);
+                        $("[name='top']").html('Modifier');
+
+                        $.gritter.add({
+                            title: "Notification",
+                            text: "Une erreur est survenue : " + request.responseText
+                        });
+                    }
+                });
+            });
+
+            function readURLTop(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#ban_top').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $('[name="file_top"]').change(function(){
+                $('#ban_top').show();
+                readURLTop(this);
+            });
+
+            function progressHandlingFunctionTop(e){
+                if(e.lengthComputable){
+                    var percentComplete = (e.loaded / e.total) * 100
+                    $('div.progress-bar').css({ "width": percentComplete + "%", });
+                    if (e.loaded == e.total) {
+                        $('div.progress-bar').css({ "width": percentComplete + "%" });
+                        setTimeout(function() {
+                            $('#progresstop').hide();
+                            $('div.progress-bar').css({ "width": "0%" });
+                        }, 2200);
+                    }
+                }
+            }
 		</script>
 	</body>
 </html>
