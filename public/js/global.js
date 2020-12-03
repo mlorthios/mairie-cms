@@ -31,7 +31,7 @@ const Marquee = Barba.BaseView.extend({
 const reCaptcha = Barba.BaseView.extend({
     namespace: 'recaptcha',
     onEnterCompleted: () => {
-        $.getScript( "https://www.google.com/recaptcha/api.js?render=6Le46YkUAAAAAOr5n00D7yCdtbQjFHpQBZ1DSZKD");
+        $.getScript( "https://www.google.com/recaptcha/api.js?render=KEY");
         $.getScript( "/public/plugins/marquee/jquery.marquee.min.js");
         $('#load_fancy img').each(function(){
             var src = $(this).attr('src');
@@ -78,7 +78,7 @@ $(document).ready(function() {
         grecaptcha.ready(function() {
             $('#addcome').html('Vérification reCaptcha...');
             $('#addcome').attr("disabled", "disabled");
-            grecaptcha.execute('6Le46YkUAAAAAOr5n00D7yCdtbQjFHpQBZ1DSZKD', {action: 'action_name'})
+            grecaptcha.execute('KEY', {action: 'action_name'})
                 .then(function(token) {
                     var data = $this.serializeArray();
                     data.push({'name': 'token', 'value': token});
@@ -126,7 +126,7 @@ $(document).ready(function() {
         grecaptcha.ready(function() {
             $('#addcom').html('Vérification reCaptcha...');
             $('#addcom').attr("disabled", "disabled");
-            grecaptcha.execute('6Le46YkUAAAAAOr5n00D7yCdtbQjFHpQBZ1DSZKD', {action: 'action_name'})
+            grecaptcha.execute('KEY', {action: 'action_name'})
                 .then(function(token) {
                     var data = $this.serializeArray();
                     data.push({'name': 'token', 'value': token});
